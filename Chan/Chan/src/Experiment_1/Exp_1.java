@@ -13,20 +13,88 @@ import java.util.*;
  */
 public class Exp_1 {
 
+    //displayMenu
+    public static void displayMenu() {
+        System.out.print("Menu\n\t1 List\n\t2 Queue\n\t3 Set\n\t4 Exit\nSelect: ");
+    }
+
+    //CRUD
+    public static void crud() {
+        System.out.print("\t1 Create\n\t2 Read\n\t3 Update\n\t4 Delete\n\t5 Back\nSelect: ");
+    }
+
+    public static void display(Iterator itr) {
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+    }
+
+    //ListMode
     public static void main(String[] args) {
         Scanner sel = new Scanner(System.in);
-        System.out.print("Menu\n\t1 List\n\t2 Queue\n\t3 Set\nSelect: ");
+        displayMenu();
         switch (sel.nextInt()) {
             case 1:
-                // Statements
-                System.out.println("List Mode\n\t1 Create\n\t2 Read\n\t3 Update\n\t4 Delete\nSelect: ");
-                break; // optional
+                // List
+                List list = new ArrayList();
+                while (true) {
+                    Scanner input = new Scanner(System.in);
+                    System.out.println("List Mode");
+                    crud();
+                    switch (sel.nextInt()) {
+                        case 1:
+                            // Create
+                            System.out.println("-Add Element-");
+                            list.add(input.nextLine());
+                            System.out.println("Successfully Added");
+                            break; // optional
 
+                        case 2:
+                            // Read
+                            if (!list.isEmpty()) {
+                                System.out.println("List Elements: ");
+                                display(list.iterator());
+                            } else {
+                                System.out.println(">>>Empty List");
+                            }
+                            break; // optional
+                            
+                        case 3:
+                            // Update
+                            if (!list.isEmpty()) {
+                                System.out.println("-Update Element (Input target Element)-");
+                                display(list.iterator());
+                                list.remove(input.nextLine());
+                            } else {
+                                System.out.println(">>>Empty List");
+                            }
+
+                        case 4:
+                            // Delete
+                            if (!list.isEmpty()) {
+                                System.out.println("-Remove Element (Input target Element)-");
+                                display(list.iterator());
+                                list.remove(input.nextLine());
+                            } else {
+                                System.out.println(">>>Empty List");
+                            }
+                        //break; // optional
+                        // You can have any number of case statements.
+                        default: // Optional
+                        // Statements
+                    }
+                }
+
+            //break; // optional
             case 2:
                 // Statements
                 break; // optional
 
             case 3:
+                // Statements
+                break; // optional
+
+            case 4:
                 // Statements
                 break; // optional
 
