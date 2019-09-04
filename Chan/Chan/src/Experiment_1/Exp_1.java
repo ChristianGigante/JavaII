@@ -82,6 +82,7 @@ public class Exp_1 {
                         // You can have any number of case statements.
                         default: // Optional
                         // Statements
+                            continue;
                     }
                 }
 
