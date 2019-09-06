@@ -144,7 +144,6 @@ public class Exp1 {
                         } else {
                             System.out.println("Element Not Exist!");
                         }
-                        System.out.println(">>>Enter Element Name: ");
                         break;
                 }
 
