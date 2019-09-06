@@ -25,13 +25,13 @@ public class ListInterface {
         }
     }
 
-    public static void main(String[] args) {
-        ArrayList<Employee> li = new ArrayList<>();
-        Employee emp = new Employee("0", "Christian", "Cebu");
-        li.add(emp);
-        for (int i = 0; i < li.size(); i++) {
-            System.out.println(li.get(i));
-        }
-
-    }
+//    public static void main(String[] args) {
+//        ArrayList<Employee> li = new ArrayList<>();
+//        Employee emp = new Employee("0", "Christian", "Cebu");
+//        li.add(emp);
+//        for (int i = 0; i < li.size(); i++) {
+//            System.out.println(li.get(i));
+//        }
+//
+//    }
 }
