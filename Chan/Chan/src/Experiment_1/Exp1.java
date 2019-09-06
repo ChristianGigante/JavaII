@@ -27,10 +27,13 @@ public class Exp1 {
         Navigator nav = new Navigator();
         sel = nav.initialMenu();
         Scanner input = new Scanner(System.in);
-        List<String> list = new ArrayList<>();
+        List<Employee> list = new ArrayList<>();
+        EmpInput sI = new EmpInput();
+        int id = 0;
         Queue<String> queue = new PriorityQueue<>();
         Set<String> set = new TreeSet<>();
         while (sel != 4) {
+            Employee emp = new Employee();
             //List
             if (sel == 1) {
                 System.out.println("List Mode");
@@ -38,33 +41,31 @@ public class Exp1 {
                 switch (jOpt) {
                     case 1:
                         System.out.println(">>>Enter Element to Add:");
-                        list.add(input.nextLine());
+                        emp.setEmpId(id);
+                        emp.setEmpName(sI.ask("Full Name"));
+                        emp.setEmpEmail(sI.ask("Email Address"));
+                        list.add(emp);
                         System.out.println("Element Added!");
+                        id++;
                         break;
                     case 2:
                         display(list.iterator(), "Elements in list:");
                         break;
                     case 3:
-                        System.out.println(">>>Enter Element to Update:");
-                        String oldObj = input.nextLine();
-                        if (list.contains(oldObj)) {
-                            System.out.println(">>>Enter Update: ");
-                            String newObj = input.nextLine();
-                            list.set(list.indexOf(oldObj), newObj);
-                            System.out.println("Element Updated!");
-                        } else {
-                            System.out.println("Element Not Exist!");
-                        }
+                        System.out.println(">>>Enter index of Element to Update:");
+                        int oldObj = input.nextInt();
+                        System.out.println(">>>Enter Update: ");
+                        emp.setEmpId(oldObj);
+                        emp.setEmpName(sI.ask("Full Name"));
+                        emp.setEmpEmail(sI.ask("Email Address"));
+                        list.set(oldObj, emp);
+                        System.out.println("Element Updated!");
+
                         break;
                     case 4:
-                        System.out.println(">>>Enter Element Name: ");
-                        String delObj = input.nextLine();
-                        if (list.contains(delObj)) {
-                            list.remove(delObj);
-                            System.out.println("Element Deleted!");
-                        } else {
-                            System.out.println("Element Not Exist!");
-                        }
+                        System.out.println(">>>Enter Element ID: ");
+                        int delObj = input.nextInt();
+                        list.remove(delObj);
                         break;
                 }
             }
@@ -125,11 +126,11 @@ public class Exp1 {
                     case 3:
                         System.out.println(">>>Enter Element to Update:");
                         String oldObj = input.nextLine();
-                        if (queue.contains(oldObj)) {
-                            queue.remove(oldObj);
+                        if (set.contains(oldObj)) {
+                            set.remove(oldObj);
                             System.out.println(">>>Enter Update: ");
                             String newObj = input.nextLine();
-                            queue.add(newObj);
+                            set.add(newObj);
                             System.out.println("Element Updated!");
                         } else {
                             System.out.println("Element Not Exist!");

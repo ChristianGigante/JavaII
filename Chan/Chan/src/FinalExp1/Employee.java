@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Experiment_1;
+package FinalExp1;
 
 /**
  *
- * @author 2ndyrGroupC
+ * @author gigantech_sd2023
  */
 public class Employee {
 
@@ -68,11 +68,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return String.format("%d%20s%50s", getEmpId(), getEmpName(), getEmpEmail());
+        return String.format("%20d%20s%20s", getEmpId(), getEmpName(), getEmpEmail());
     }
-    
-//    public static void main(String[] args){
-//        Employee emp = new Employee(1,"christian","christiangigante@gmail.com");
-//        System.out.println(emp);
-//    }
 }
