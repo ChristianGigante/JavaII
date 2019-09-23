@@ -9,15 +9,10 @@ package ExceptionHandlingJava;
  *
  * @author gigantech_sd2023
  */
-public class InputOutputException extends Exception {
+class InputOutputException extends Exception {
 
-    public InputOutputException(String password_too_short) {
-
-    }
-
-    InputOutputException() {
+    InputOutputException(String username_too_short) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
+    
 }
