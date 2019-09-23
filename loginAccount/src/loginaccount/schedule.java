@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class schedule {
@@ -44,7 +45,7 @@ public class schedule {
             File schedule = new File("schedule.txt"/*,true*/);
 
             try (BufferedWriter fw = new BufferedWriter(new FileWriter(schedule, true))) {
-                while (true) {                  
+                while (true) {
                     System.out.println("Do you want to add subject??\t\n Yes or No");
                     String ans = scan.next();
                     if (ans.equals("Yes") || ans.equals("yes") || ans.equals("YES")) {
@@ -65,16 +66,15 @@ public class schedule {
                         }
                         System.out.print("Enter Schedule: ");
                         String Sched = scan.next();
-                        
-                        
+
                         while (!check(Sched)) {
                             System.out.print("Invalid Schedule!!!\nPlease Enter new Schedule: ");
                             Sched = scan.next();
                         }
 
-                        fw.write(this.sid++ + "\t" + accID + "\t" + sub + "\t" + unit + "\t" + Sched + "\n\n");
-
-                    } else if(ans.equals("No") || ans.equals("no") || ans.equals("NO")){
+                        fw.write(this.sid++ + "\t" + accID + "\t" + sub + "\t" + unit + "\t" + Sched + "\n");
+                        
+                    } else if (ans.equals("No") || ans.equals("no") || ans.equals("NO")) {
                         fw.close();
                         break;
                     }

@@ -1,2 +1,4 @@
 1	18101	chan	gigante	12
 2	18102	luke	kasss	30
+1	18101	gigante	christian	20
+2	18102	chan	gigante	210

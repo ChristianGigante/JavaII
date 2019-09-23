@@ -5,12 +5,6 @@
  */
 package Experiment_3;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -23,16 +17,10 @@ public class Account {
     //attributes
     private String username;
     private String password;
-    private int id = 1;
-        private int accID = 18100 + id;
+    private int id;
 
     //constructors
     public Account() {
-                try {
-            this.id = id();
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
     }
 
     public Account(String username, String password) {
@@ -88,51 +76,23 @@ public class Account {
 
     //logInAccount
     public void loginAccount() {
-        try {
-            File out = new File("Accounts.txt"/*,true*/);
-            try (BufferedWriter fr = new BufferedWriter(new FileWriter(out, true))) {
-                InputOutput inOut = new InputOutput();
-                String usern = inOut.ask("Username");
-                while (!checkUsername(usern)) {
-                    inOut.print("Invalid Username!!!\nPlease Enter new Username: ");
-                    usern = inOut.ask("Username");
-                }
-                String passw = inOut.ask("Password");
-                while (!checkPassword(passw)) {
-                    inOut.print("Invalid Password!!!\nIt should be at least 8 characters..");
-                    inOut.print("Please enter new password: ");
-                    passw = inOut.ask("Again the Password");
-                }
-                String newpassw = inOut.ask("Again the Password");
-                while (!matchPassword(passw, newpassw)) {
-                    inOut.print("Password did not match!!!\nPlease confirm password: ");
-                    newpassw = inOut.ask("Match Password");
-                }
-                fr.write(accID + "\t" + usern + "\t" + passw);
-                fr.newLine();
-                fr.close();
+            InputOutput inOut = new InputOutput();
+            String usern = inOut.ask("Username");
+            while (!checkUsername(usern)) {
+                inOut.print("Invalid Username!!!\nPlease Enter new Username: ");
+                usern = inOut.ask("Username");
             }
-
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        
-        public final int id() throws FileNotFoundException, IOException {
-        BufferedReader reader;
-
-        reader = new BufferedReader(new FileReader("login.txt"));
-        String line = reader.readLine();
-        while (line != null) {
-            if (line.length() != 0) {
-                ++id;
-                ++accID;
+            String passw = inOut.ask("Password");
+            while (!checkPassword(passw)) {
+                inOut.print("Invalid Password!!!\nIt should be at least 8 characters..");
+                inOut.print("Please enter new password: ");
+                passw = inOut.ask("Again the Password");
             }
-            line = reader.readLine();
-        }
-        reader.close();
-        return id;
-    }
-            
+            String newpassw = inOut.ask("Again the Password");
+            while (!matchPassword(passw, newpassw)) {
+                inOut.print("Password did not match!!!\nPlease confirm password: ");
+                newpassw = inOut.ask("Match Password");
+            }
     }
 
 }
