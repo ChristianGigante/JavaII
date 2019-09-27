@@ -1,2 +1,0 @@
-18101	chan	chan1234
-18102	chan	chan1234

@@ -15,7 +15,7 @@ public class InputOutput {
 
     public String ask(String label) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\nEnter " + label + " : ");
+        System.out.print("\nInput " + label + " : ");
         return scanner.next();
     }
     
