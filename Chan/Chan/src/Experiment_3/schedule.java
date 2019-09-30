@@ -48,10 +48,8 @@ public class schedule {
 //    }
     public void schedule(int id, int accID) {
         Scanner scan = new Scanner(System.in);
-
         try {
             File schedule = new File("schedule.txt"/*,true*/);
-
             try (BufferedWriter fw = new BufferedWriter(new FileWriter(schedule, true))) {
                 while (true) {
                     System.out.println("Do you want to add subject??\t\n Yes or No");

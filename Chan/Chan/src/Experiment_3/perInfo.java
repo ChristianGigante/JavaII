@@ -60,35 +60,22 @@ public class perInfo {
     }
 
     public void register(int id, int accID) {
+        InputOutput io = new InputOutput();
         this.id = id;
-        Scanner scan = new Scanner(System.in);
         try {
-
             File register = new File("register.txt"/*,true*/);
-
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(register, true))) {
-                System.out.print("Enter Your Firstname: ");
-                String fname = scan.next();
-
+                String fname = io.ask("Your Firstname");
                 while (!check(fname)) {
-                    System.out.print("Invalid Name!!!\nPlease Enter new Name: ");
-                    fname = scan.next();
+                    fname = io.ask("Invalid First Name!!!\nNew First Name");
                 }
-                
-                System.out.print("Enter Your Lastname: ");
-                String lname = scan.next();
-
+                String lname = io.ask("Your Lastname");
                 while (!check(lname)) {
-                    System.out.print("Invalid Lastname!!!\nPlease Enter new Lastname: ");
-                    lname = scan.next();
+                    lname = io.ask("Invalid Last Name!!!\nNew Last Name");
                 }
-                
-                System.out.print("Enter Your Age: ");
-                String age1 = scan.next();
-                
+                String age1 = io.ask("Your Age");
                 while (!checkInt(age1)) {
-                    System.out.print("Invalid Input!!!\nPlease Enter your age: ");
-                    age1 = scan.next();
+                    age1 = io.ask("Invalid Age!!!\nYour Age");
                 }
 
                 bw.write(this.id + "\t" + accID + "\t" + fname + "\t" + lname + "\t" + age1);
@@ -101,11 +88,12 @@ public class perInfo {
 
         }
     }
-    
+
     public boolean checkInt(String age) {
         String rule = "\\d+";
         return age.matches(rule);
     }
+
     public boolean check(String username) {
         String rule = "^[a-zA-Z ]*$";
         return username.matches(rule);
