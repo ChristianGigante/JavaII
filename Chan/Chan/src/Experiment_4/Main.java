@@ -17,14 +17,21 @@ public class Main {
 
     //main
     public static void main(String[] args) throws IOException {
-        Experiment_3.InputOutput io = new Experiment_3.InputOutput();
+        InputOutput io = new InputOutput();
         String num = io.ask("\t [YES] to Enroll \t [NO] to Exit");
         while (num.equalsIgnoreCase("yes")) {
-            Account acc = new Account();
-//            perInfo per = new perInfo();
-//            schedule sched = new schedule();
-            acc.loginAccount();
-            acc.save();
+            String val = "1";
+            switch(val){
+                case "1":
+                    io.menuCrud();
+                default:
+                    val = "1";
+            }
+//            Account acc = new Account();
+////            perInfo per = new perInfo();
+////            schedule sched = new schedule();
+//            acc.loginAccount();
+//            acc.saveAccount();
 //            per.register(acc.getId(), acc.getAccID());
 //            sched.schedule(sched.getSid(), acc.getAccID());
             num = io.ask("\t [YES] to Enroll \t [NO] to Exit");

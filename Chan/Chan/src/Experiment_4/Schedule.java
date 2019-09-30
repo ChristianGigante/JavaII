@@ -5,7 +5,6 @@
  */
 package Experiment_4;
 
-
 /**
  *
  * @author gigantech_sd2023
@@ -48,40 +47,30 @@ public class Schedule {
 //        this.id = id;
 //    }
     public void schedule(int id, int accID) {
-        Scanner scan = new Scanner(System.in);
+        InputOutput io = new InputOutput();
         try {
             File schedule = new File("schedule.txt"/*,true*/);
             try (BufferedWriter fw = new BufferedWriter(new FileWriter(schedule, true))) {
                 while (true) {
-                    System.out.println("Do you want to add subject??\t\n Yes or No");
-                    String ans = scan.next();
-                    if (ans.equals("Yes") || ans.equals("yes") || ans.equals("YES")) {
-                        System.out.print("Enter Subject: ");
-                        String sub = scan.next();
-
+                    io.print("Do you want to add subject?");
+                    String ans = io.ask("Yes or No");
+                    if (ans.equalsIgnoreCase("yes")) {
+                        String sub = io.ask("Enter Subject: ");
                         while (!check(sub)) {
-                            System.out.print("Invalid Subject!!!\nPlease Enter new Subject: ");
-                            sub = scan.next();
+                            sub = io.ask("Invalid Subject!!!\nPlease Enter new Subject: ");
                         }
-
-                        System.out.print("Enter how many units: ");
-                        String unit = scan.next();
-
+                        String unit = io.ask("how many units");
                         while (!checkInt(unit)) {
-                            System.out.print("Invalid Input!!!\nPlease Enter Units: ");
-                            unit = scan.next();
+                            unit = io.ask("Invalid Input!!!\nPlease Enter Units: ");
                         }
-                        System.out.print("Enter Schedule: ");
-                        String Sched = scan.next();
-
+                        String Sched = io.ask("Schedule");
                         while (!check(Sched)) {
-                            System.out.print("Invalid Schedule!!!\nPlease Enter new Schedule: ");
-                            Sched = scan.next();
+                            Sched = io.ask("Invalid Schedule!!!\nPlease Enter new Schedule");
                         }
 
                         fw.write(this.sid++ + "\t" + accID + "\t" + sub + "\t" + unit + "\t" + Sched + "\n");
-                        
-                    } else if (ans.equals("No") || ans.equals("no") || ans.equals("NO")) {
+
+                    } else if (ans.equalsIgnoreCase("no")) {
                         fw.close();
                         break;
                     }
@@ -91,6 +80,31 @@ public class Schedule {
             System.out.println(e);
         }
     }
+//
+//    public void saveSched() {
+//        try {
+//            File schedule = new File("schedule.txt"/*,true*/);
+//            try (BufferedWriter fw = new BufferedWriter(new FileWriter(schedule, true))) {
+//                while (true) {
+//                    
+//                    fw.write(this.sid++ + "\t" + accID + "\t" + sub + "\t" + unit + "\t" + Sched + "\n");
+//                }else if (ans.equalsIgnoreCase("no")) {
+//                        fw.close();
+//                        break;
+//                    }
+//            }
+//        } catch (IOException e) {
+//            System.out.println(e);
+//        }
+//    
+//
+//    
+//
+//    
+
+    
+
+    
 
     public final int sid() throws FileNotFoundException, IOException {
         BufferedReader reader;

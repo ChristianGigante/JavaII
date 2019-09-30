@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Experiment_4;
+
 import java.util.Scanner;
 
 /**
@@ -12,13 +13,19 @@ import java.util.Scanner;
  */
 public class InputOutput {
 
+    public Scanner scanner = new Scanner(System.in);
+
     public String ask(String label) {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("\nInput " + label + " : ");
         return scanner.next();
     }
-    
+
     public void print(String label) {
         System.out.println(label);
+    }
+
+    public void menuCrud() {
+        print("\tMenu\n[1] Create\n[2] Retrieve\n[3] Update\n[4] Delete");
+        ask("");
     }
 }

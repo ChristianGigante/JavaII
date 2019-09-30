@@ -76,7 +76,7 @@ public class Account {
     //toString()
     @Override
     public String toString() {
-        return "Account{" + "username=" + username + ", password=" + password + ", id=" + id + '}';
+        return "Account{" + "id=" + id + ", username=" + username + ", password=" + password + '}';
     }
 
     //ownMethods
@@ -128,13 +128,14 @@ public class Account {
             inOut.print("Password did not match!!!");
             newpassw = inOut.ask("Match Password");
         }
-        
+
+        this.setId(getAccID());
         this.setUsername(usern);
-        this.setPassword(newpassw);
+        this.setPassword("" + hash(passw.toCharArray()));
         inOut.print("Stage 1 done!");
     }
 
-    public void save() {
+    public void saveAccount() {
         File out = new File("login.txt"/*,true*/);
         try (BufferedWriter fr = new BufferedWriter(new FileWriter(out, true))) {
             fr.write(getAccID() + "\t" + this.username + "\t" + hash(this.password.toCharArray()));
@@ -144,5 +145,18 @@ public class Account {
             System.out.println(e);
         }
     }
+
+//    public static void main(String[] args) {
+//        ArrayList<Account> li = new ArrayList<>();
+//        while (true) {
+//            Account acc = new Account();
+//            acc.loginAccount();
+//            li.add(acc);
+//            for (Account a : li) {
+//                System.out.println(a);
+//            }
+//        }
+//
+//    }
 
 }
