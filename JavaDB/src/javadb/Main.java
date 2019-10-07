@@ -13,19 +13,32 @@ public class Main {
 
     //input or output
     public static InputOutput io = new InputOutput();
-    
+
     //main
     public static void main(String[] args) {
         //configureJDBC
         ConfigDB configDB = new ConfigDB();
         configDB.connectDB();
 
-        
-        while(Integer.valueOf(io.menuCrud()) != 5){
-            io.print("in");
+        //account interface
+        AccountInterface acc = new AccountInterface();
+
+        int sel = Integer.valueOf(io.menuCrud());
+
+        while (sel != 5) {
+            switch (sel) {
+                case 1:
+                    acc.addAccount();
+                    break;
+                case 2:
+                    acc.retrieveAccount();
+                    break;
+                default:
+                    break;
+            }
+            sel = Integer.valueOf(io.menuCrud());
         }
         io.print("out");
-        
-        
+
     }
 }
