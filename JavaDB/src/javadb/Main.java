@@ -36,9 +36,9 @@ public class Main {
                 case 3:
                     acc.updateAccount();
                     break;
-//                case 4:
-//                    acc.deleteAccount();
-//                    break;
+                case 4:
+                    acc.deleteAccount();
+                    break;
                 default:
                     break;
             }

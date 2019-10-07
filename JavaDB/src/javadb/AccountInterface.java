@@ -23,32 +23,61 @@ public class AccountInterface {
     public static int id;
 
     //methods
+    //retrieveAccount Method
     public void retrieveAccount() {
 
-        try {
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
-            String sql = "SELECT * FROM tblaccounts";
-            ResultSet rs = stmt.executeQuery(sql);
-            io.print("\t[Retrieving Account/s]");
+        int sel = Integer.valueOf(io.ask("\n\t[1]Retrieve Account By ID\n\t[2]Retrieve All Accounts\n"));
+
+        if (sel == 1) {
+            try {
+                Class.forName(JDBC_DRIVER);
+                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                stmt = conn.createStatement();
+                int accId = Integer.valueOf(io.ask("Id of Account to be Retrieve"));
+                String sql = "SELECT * FROM tblaccounts WHERE id = " + accId;
+                ResultSet rs = stmt.executeQuery(sql);
+                io.print("\t[Retrieving Account]");
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
                 System.out.println(id + "\t" + username + "\t" + password + "\t");
             }
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch (SQLException se) {
-            se.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+                rs.close();
+                stmt.close();
+                conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (sel == 2) {
+            try {
+                Class.forName(JDBC_DRIVER);
+                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                stmt = conn.createStatement();
+                String sql = "SELECT * FROM tblaccounts";
+                ResultSet rs = stmt.executeQuery(sql);
+                io.print("\t[Retrieving Accounts]");
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    System.out.println(id + "\t" + username + "\t" + password + "\t");
+                }
+                rs.close();
+                stmt.close();
+                conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         System.out.println("\t[Done!]");
     }
 
+    //addAccount Method
     public void addAccount() {
         String username, password, confirm;
         io.print("Creating to DB");
@@ -83,7 +112,6 @@ public class AccountInterface {
                 System.err.println(ex);
             }
         }
-
         try {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -103,12 +131,11 @@ public class AccountInterface {
             //Handle errors for Class.forName
             e.printStackTrace();
         }
-        System.out.println("Saved!");
+        System.out.println("Done!");
     }
 
+    //updateAccount Method
     public void updateAccount() {
-        Connection conn = null;
-        Statement stmt = null;
         try {
             Class.forName(JDBC_DRIVER);
             io.print("Updating Account..,");
@@ -141,6 +168,41 @@ public class AccountInterface {
                 System.out.println(se);
             }//end finally try
         }//end try
-        io.print("Account Updated!");
+        io.print("Done!");
+    }
+
+    //deleteAccount Method
+    public void deleteAccount() {
+        try {
+            Class.forName(JDBC_DRIVER);
+            io.print("Deleting Account..,");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            int accId = Integer.valueOf(io.ask("Id of Account to be Remove"));
+            String accountUpdate = "DELETE FROM `tblaccounts` WHERE id = " + accId;
+            stmt.executeUpdate(accountUpdate);
+            stmt.close();
+            conn.close();
+        } catch (SQLException se) {
+            System.out.println(se);
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+                System.out.println(se2);
+            }// nothing we can do
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                System.out.println(se);
+            }//end finally try
+        }//end try
+        io.print("Done!");
     }
 }
