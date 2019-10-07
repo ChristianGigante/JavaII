@@ -33,6 +33,12 @@ public class Main {
                 case 2:
                     acc.retrieveAccount();
                     break;
+                case 3:
+                    acc.updateAccount();
+                    break;
+//                case 4:
+//                    acc.deleteAccount();
+//                    break;
                 default:
                     break;
             }

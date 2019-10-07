@@ -29,7 +29,7 @@ public class AccountInterface {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM chan";
+            String sql = "SELECT * FROM tblaccounts";
             ResultSet rs = stmt.executeQuery(sql);
             io.print("\t[Retrieving Account/s]");
             while (rs.next()) {
@@ -88,7 +88,7 @@ public class AccountInterface {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            String sql = "INSERT INTO chan (username, password) VALUES ";
+            String sql = "INSERT INTO tblaccounts (username, password) VALUES ";
             sql += "('" + username + "', '" + password + "')";
             //sql += "('" + username + "', '" + hash(password.toCharArray()) + "')";
             System.out.println(sql);
@@ -104,5 +104,43 @@ public class AccountInterface {
             e.printStackTrace();
         }
         System.out.println("Saved!");
+    }
+
+    public void updateAccount() {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            io.print("Updating Account..,");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            int accId = Integer.valueOf(io.ask("Id of Account to be Update"));
+            String newUsername = io.ask("New Username");
+            String newPassword = io.ask("New Password");
+            String accountUpdate = "UPDATE `tblaccounts` SET `username`='" + newUsername + "',`password`= '" + newPassword + "' WHERE `id`= " + accId;
+            stmt.executeUpdate(accountUpdate);
+            stmt.close();
+            conn.close();
+        } catch (SQLException se) {
+            System.out.println(se);
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+                System.out.println(se2);
+            }// nothing we can do
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                System.out.println(se);
+            }//end finally try
+        }//end try
+        io.print("Account Updated!");
     }
 }
