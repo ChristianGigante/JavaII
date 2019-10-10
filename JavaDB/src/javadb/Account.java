@@ -10,20 +10,29 @@ package javadb;
  * @author 2ndyrGroupC
  */
 public class Account {
+
     //attributes
     private String username;
     private String password;
+    private int id;
+    private int accID = 992019 + id;
 
     //constructors
     public Account() {
+//        try {
+//            this.id = id();
+//        } catch (IOException ex) {
+//            System.out.println(ex);
+//        }
     }
 
-    public Account(String username, String password) {
+    public Account(int id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    //getters&setters
+    //gettersAndSetters
     public String getUsername() {
         return username;
     }
@@ -40,10 +49,26 @@ public class Account {
         this.password = password;
     }
 
-    //toString
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getAccID() {
+        return accID;
+    }
+
+    public void setAccID(int accID) {
+        this.accID = accID;
+    }
+
+    //toString()
     @Override
     public String toString() {
-        return "Account{" + "username=" + username + ", password=" + password + '}';
+        return "Account{" + "id=" + id + ", username=" + username + ", password=" + password + '}';
     }
     
     

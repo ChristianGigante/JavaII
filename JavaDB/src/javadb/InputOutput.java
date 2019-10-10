@@ -17,6 +17,8 @@ public class InputOutput {
 
     public Scanner scanner = new Scanner(System.in);
 
+    public static String sel;
+    
     public String ask(String label) {
         System.out.print("\nInput " + label + " : ");
         return scanner.next();
@@ -28,7 +30,18 @@ public class InputOutput {
 
     public String menuCrud() {
         print("\tMenu\n[1] Create\n[2] Retrieve\n[3] Update\n[4] Delete\n[5] Exit");
-        String sel = ask("Choice");
+        sel = ask("Choice");
         return sel;
     }
+    
+    public int menuOption(String label){
+        print("\t" + label +"\n[1] Account\n[2] Personal Information\n[3] Schedule\n[4] Back");
+        sel = ask("Choice");
+        return Integer.valueOf(sel);
+    }
+    
+    
+    
+    
+    
 }

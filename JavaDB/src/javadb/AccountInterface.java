@@ -6,6 +6,7 @@
 package javadb;
 
 import java.sql.*;
+import java.util.ArrayList;
 import static java.util.Objects.hash;
 import static javadb.ConfigDB.*;
 import static javadb.ValidatorException.*;
@@ -21,6 +22,7 @@ public class AccountInterface {
     public static Connection conn;
     public static Statement stmt;
     public static int id;
+//    public static ArrayList<Account> accList = new ArrayList();
 
     //methods
     //retrieveAccount Method
@@ -37,12 +39,13 @@ public class AccountInterface {
                 String sql = "SELECT * FROM tblaccounts WHERE id = " + accId;
                 ResultSet rs = stmt.executeQuery(sql);
                 io.print("\t[Retrieving Account]");
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                System.out.println(id + "\t" + username + "\t" + password + "\t");
-            }
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    System.out.println(id + "\t" + username + "\t" + password + "\t");
+//                    accList.add(new Account(id, username, password));
+                }
                 rs.close();
                 stmt.close();
                 conn.close();
@@ -205,4 +208,7 @@ public class AccountInterface {
         }//end try
         io.print("Done!");
     }
+
+
+    
 }
