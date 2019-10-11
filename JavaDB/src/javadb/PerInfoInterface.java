@@ -27,7 +27,7 @@ public class PerInfoInterface {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            String sql = "SELECT max(id) from tblaccounts orderby id";
+            String sql = "SELECT LAST_INSERT_ID() FROM tblaccounts";
             ResultSet rs = stmt.executeQuery(sql);
             lastid = rs.getInt("id");
             System.out.println(lastid);
@@ -41,6 +41,11 @@ public class PerInfoInterface {
         }
         
         return lastid;
+    }
+    
+    public static void main(String args[]){
+        PerInfoInterface p = new PerInfoInterface();
+        System.out.println(p.getLastId());
     }
 
 }
