@@ -17,7 +17,7 @@ public class ValidatorException extends Exception {
 
     public static void isString(String str) throws ValidatorException {
         if (str.matches(".*\\d.*")) {
-            throw new ValidatorException("Invalid Username!!!");
+            throw new ValidatorException("Must only be String!!!");
         }
     }
 
@@ -25,7 +25,7 @@ public class ValidatorException extends Exception {
         String num1 = num.toString();
         for (char c : num1.toCharArray()) {
             if (!Character.isDigit(c)) {
-                throw new ValidatorException("Invalid!!!");
+                throw new ValidatorException("Must be a Number!");
             }
         }
 

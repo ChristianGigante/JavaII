@@ -20,7 +20,7 @@ public class JavaDB {
     public static int val;
 
     //main
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         //configureJDBC
         ConfigDB configDB = new ConfigDB();
         configDB.connectDB();
@@ -42,7 +42,7 @@ public class JavaDB {
                             acc.addAccount();
                             break;
                         case 2: //addPerInfo
-                            io.print(""+perInfo.getLastId());
+                            perInfo.addPerInfo();
                             break;
                         case 3: //addSched
                             io.print("sched");
@@ -56,7 +56,21 @@ public class JavaDB {
                     break;
                 case 2: //retrieve
                     val = io.menuOption("Retrieve");
-                    acc.retrieveAccount();
+                    switch (val) {
+                        case 1: //RetrieveAccount
+                            acc.retrieveAccount();
+                            break;
+                        case 2: //RetrievePerInfo
+                            perInfo.retrievePerInfo();
+                            break;
+                        case 3: //RetrieveSched
+                            io.print("sched");
+                            break;
+                        case 4: //Back
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case 3: //update
                     val = io.menuOption("Update");
