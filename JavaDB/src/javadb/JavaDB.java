@@ -66,9 +66,9 @@ public class JavaDB {
                             }
                             break;
                         case 2: //addPerInfo
-                            int acc_id;
+                            String acc_id;
                             while (true) {
-                                acc_id = Integer.valueOf(io.ask("Account ID"));
+                                acc_id = io.ask("Account ID");
                                 try {
                                     isNumber(acc_id);
                                     break;
@@ -76,7 +76,13 @@ public class JavaDB {
                                     System.err.println(e);
                                 }
                             }
-                            perInfo.addPerInfo(acc_id);
+                            int accID =Integer.valueOf(acc_id);
+                            int temp = acc.getLastId();
+                            if (accID > temp) {
+                                io.print("Account ID does not Exist!");
+                            } else {
+                                perInfo.addPerInfo(accID);
+                            }
                             break;
                         case 3: //addSched
                             io.print("sched");
