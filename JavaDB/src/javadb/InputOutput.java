@@ -1,6 +1,5 @@
 package javadb;
 
-
 import java.util.Scanner;
 
 /*
@@ -8,7 +7,6 @@ import java.util.Scanner;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author 2ndyrGroupC
@@ -18,7 +16,7 @@ public class InputOutput {
     public Scanner scanner = new Scanner(System.in);
 
     public static String sel;
-    
+
     public String ask(String label) {
         System.out.print("\nInput " + label + " : ");
         return scanner.next();
@@ -33,15 +31,24 @@ public class InputOutput {
         sel = ask("Choice");
         return sel;
     }
-    
-    public int menuOption(String label){
-        print("\t" + label +"\n[1] Account\n[2] Personal Information\n[3] Schedule\n[4] Back");
+
+    public int menuOption(String label) {
+        print("\t" + label + "\n[1] Account\n[2] Personal Information\n[3] Schedule\n[4] Back");
+        sel = ask("Choice");
+        return Integer.valueOf(sel);
+    }
+
+    public int menuOptionCreatePerInfo() {
+        print("\tOptional\n[1] Add Personal Information\n[2] Leave");
         sel = ask("Choice");
         return Integer.valueOf(sel);
     }
     
     
-    
-    
-    
+    public int menuOptionCreateSched() {
+        print("\tOptional\n[1] Add Schedule\n[2] Leave");
+        sel = ask("Choice");
+        return Integer.valueOf(sel);
+    }
+
 }

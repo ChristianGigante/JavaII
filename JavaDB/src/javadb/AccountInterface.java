@@ -24,6 +24,28 @@ public class AccountInterface {
     public static int id;
 
     //methods
+    
+    //get Last ID in account table
+    public int getLastId() throws Exception {
+        int lastid = 0;
+        Class.forName(JDBC_DRIVER);
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        String sql = "SELECT max(id) FROM tblaccounts";
+        ResultSet rs = stmt.executeQuery(sql);
+        if (rs.next()) {
+            lastid = rs.getInt(1);
+        } else {
+            io.print("Not Found!");
+        }
+        System.out.println(lastid);
+        rs.close();
+        stmt.close();
+        conn.close();
+        return lastid;
+    }
+    
+    
     //retrieveAccount Method
     public void retrieveAccount() {
 
@@ -79,7 +101,7 @@ public class AccountInterface {
     }
 
     //addAccount Method
-    public void addAccount() {
+    public int addAccount() throws Exception {
         String username, password, confirm;
         io.print("Creating to DB");
         while (true) {
@@ -133,6 +155,7 @@ public class AccountInterface {
             e.printStackTrace();
         }
         System.out.println("Done!");
+        return getLastId();
     }
 
     //updateAccount Method
