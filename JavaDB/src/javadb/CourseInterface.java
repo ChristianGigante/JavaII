@@ -11,34 +11,32 @@ import static javadb.ValidatorException.*;
 
 /**
  *
- * @author 2ndyrGroupC
+ * @author 1styrGroupC
  */
-public class PerInfoInterface {
+public class CourseInterface {
 
     // input or output
     public static InputOutput io = new InputOutput();
     public static Statement stmt;
 
-    
-
     //retrieveAccount Method
-    public void retrievePerInfo() {
-        int sel = Integer.valueOf(io.ask("\n\t[1]Retrieve Personal Information By ID\n\t[2]Retrieve All Personal Information\n"));
+    public void retrieveCourse() {
+        int sel = Integer.valueOf(io.ask("\n\t[1]Retrieve Course By ID\n\t[2]Retrieve All Course\n"));
         if (sel == 1) {
             try {
                 Connection conn = getConnection();
                 stmt = conn.createStatement();
-                int accId = Integer.valueOf(io.ask("Id of Personal Information to be Retrieve"));
-                String sql = "SELECT * FROM tblperinfo WHERE id = " + accId;
+                int accId = Integer.valueOf(io.ask("Id of Course to be Retrieve"));
+                String sql = "SELECT * FROM tblcourses WHERE id = " + accId;
                 ResultSet rs = stmt.executeQuery(sql);
-                io.print("\t[Retrieving Account]");
+                io.print("\t[Retrieving Course]");
                 while (rs.next()) {
                     int id = rs.getInt("id");
                     int accountID = rs.getInt("accountID");
-                    String fname = rs.getString("firstname");
-                    String lname = rs.getString("lastname");
-                    int age = rs.getInt("age");
-                    System.out.println(id + "\t" + accountID + "\t" + fname + "\t" + lname + "\t" + age);
+                    String title = rs.getString("title");
+                    String schedule = rs.getString("schedule");
+                    int unit = rs.getInt("unit");
+                    System.out.println(id + "\t" + accountID + "\t" + title + "\t" + unit + "\t" + schedule);
                 }
                 rs.close();
                 stmt.close();
@@ -53,16 +51,16 @@ public class PerInfoInterface {
             try {
                 Connection conn = getConnection();
                 stmt = conn.createStatement();
-                String sql = "SELECT * FROM tblperinfo";
+                String sql = "SELECT * FROM tblcourses";
                 ResultSet rs = stmt.executeQuery(sql);
-                io.print("\t[Retrieving Account]");
+                io.print("\t[Retrieving Course]");
                 while (rs.next()) {
                     int id = rs.getInt("id");
                     int accountID = rs.getInt("accountID");
-                    String fname = rs.getString("firstname");
-                    String lname = rs.getString("lastname");
-                    int age = rs.getInt("age");
-                    System.out.println(id + "\t" + accountID + "\t" + fname + "\t" + lname + "\t" + age);
+                    String title = rs.getString("title");
+                    String schedule = rs.getString("schedule");
+                    int unit = rs.getInt("unit");
+                    System.out.println(id + "\t" + accountID + "\t" + title + "\t" + unit + "\t" + schedule);
                 }
                 rs.close();
                 stmt.close();
@@ -76,33 +74,35 @@ public class PerInfoInterface {
         }
     }
 
-    //add PerInfo
-    public void addPerInfo(int accID) throws Exception {
-        String fname, lname;
-        int age;
-        io.print("Creating Personal Information to DB");
+    //add Sched
+    public void addCourse(int accID) throws Exception {
+        String title, schedule;
+        int unit;
+        io.print("Creating Schedule to DB");
         while (true) {
-            fname = io.ask("Firstname");
+            title = io.ask("Course Title");
             try {
-                isString(fname);
+                isString(title);
                 break;
             } catch (ValidatorException e) {
                 System.err.println(e);
             }
         }
+
         while (true) {
-            lname = io.ask("Lastname");
+            unit = Integer.valueOf(io.ask("Number of Units"));
             try {
-                isString(lname);
+                isNumber(unit);
                 break;
             } catch (ValidatorException e) {
                 System.err.println(e);
             }
         }
+
         while (true) {
-            age = Integer.valueOf(io.ask("Age"));
+            schedule = io.ask("Schedule");
             try {
-                isNumber(age);
+                isString(schedule);
                 break;
             } catch (ValidatorException e) {
                 System.err.println(e);
@@ -113,8 +113,8 @@ public class PerInfoInterface {
             int acc_ID = accID;
             Connection conn = getConnection();
             stmt = conn.createStatement();
-            String sql = "INSERT INTO tblperinfo (accountID, firstname, lastname, age) VALUES ";
-            sql += "('" + acc_ID + "', '" + fname + "', '" + lname + "', '" + age + "')";
+            String sql = "INSERT INTO tblcourses (accountID, title, unit, schedule) VALUES ";
+            sql += "('" + acc_ID + "', '" + title + "', '" + unit + "', '" + schedule + "')";
             System.out.println(sql);
             stmt.executeUpdate(sql);
             stmt.close();
@@ -130,42 +130,46 @@ public class PerInfoInterface {
     }
 
     //update PerInfo
-    public void updatePerInfo(int accId) {
+    public void updateCourse(int accId) {
         try {
             Connection conn = getConnection();
             stmt = conn.createStatement();
-//            int accId = Integer.valueOf(io.ask("Account ID of Personal Information to be Update"));
-            String fname, lname;
-            int age;
-            io.print("Updating Personal Information..,");
+//            int accId = Integer.valueOf(io.ask("Account ID of Course to be Update"));
+            io.print("Updating Course Information..,");
+            String title, schedule;
+            int unit;
+            io.print("Creating Schedule to DB");
             while (true) {
-                fname = io.ask("New Firstname");
+                title = io.ask("New Course Title");
                 try {
-                    isString(fname);
+                    isString(title);
                     break;
                 } catch (ValidatorException e) {
                     System.err.println(e);
                 }
             }
+
             while (true) {
-                lname = io.ask("New Lastname");
+                unit = Integer.valueOf(io.ask("Number of Units"));
                 try {
-                    isString(lname);
+                    isNumber(unit);
                     break;
                 } catch (ValidatorException e) {
                     System.err.println(e);
                 }
             }
+
             while (true) {
-                age = Integer.valueOf(io.ask("New Age"));
+                schedule = io.ask("Schedule");
                 try {
-                    isNumber(age);
+                    isString(schedule);
                     break;
                 } catch (ValidatorException e) {
                     System.err.println(e);
                 }
             }
-            String perInfoUpdate = "UPDATE `tblperinfo` SET `firstname`='" + fname + "',`lastname`= '" + lname + "',`age`= '" + age + "' WHERE `accountID`= " + accId;
+
+            String perInfoUpdate = "UPDATE `tblperinfo` SET `title`='" + title + "',`unit`= '" + unit + "',`schedule`= '" + schedule + "' WHERE `accountID`= " + accId;
             stmt.executeUpdate(perInfoUpdate);
             stmt.close();
             conn.close();
@@ -187,12 +191,12 @@ public class PerInfoInterface {
     }
 
     //deletePerInfo Method
-    public void deletePerInfo(int accId) {
+    public void deleteCourse(int accId) {
         try {
             Connection conn = getConnection();
             stmt = conn.createStatement();
-//            int accId = Integer.valueOf(io.ask("Account ID of Personal Information to be Remove"));
-            String perInfoDel = "DELETE FROM `tblperinfo` WHERE accountID = " + accId;
+//            int accId = Integer.valueOf(io.ask("Account ID of Course to be Remove"));
+            String perInfoDel = "DELETE FROM `tblcouses` WHERE accountID = " + accId;
             stmt.executeUpdate(perInfoDel);
             stmt.close();
             conn.close();
@@ -219,3 +223,5 @@ public class PerInfoInterface {
     }
 
 }
+
+

@@ -12,7 +12,7 @@ import java.sql.*;
 public class ConfigDB {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/test";
+    static final String DB_URL = "jdbc:mysql://localhost/chan";
 
     //  Database credentials
     static final String USER = "root";

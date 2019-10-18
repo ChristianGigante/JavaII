@@ -38,7 +38,7 @@ public class AccountInterface {
         } else {
             io.print("Not Found!");
         }
-        System.out.println(lastid);
+//        System.out.println("The Last Id is " + lastid);
         rs.close();
         stmt.close();
         conn.close();
@@ -159,13 +159,13 @@ public class AccountInterface {
     }
 
     //updateAccount Method
-    public void updateAccount() {
+    public void updateAccount(int accId) {
         try {
             Class.forName(JDBC_DRIVER);
             io.print("Updating Account..,");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            int accId = Integer.valueOf(io.ask("Id of Account to be Update"));
+//            int accId = Integer.valueOf(io.ask("Id of Account to be Update"));
             String newUsername = io.ask("New Username");
             String newPassword = io.ask("New Password");
             String accountUpdate = "UPDATE `tblaccounts` SET `username`='" + newUsername + "',`password`= '" + newPassword + "' WHERE `id`= " + accId;
@@ -196,13 +196,13 @@ public class AccountInterface {
     }
 
     //deleteAccount Method
-    public void deleteAccount() {
+    public void deleteAccount(int accId) {
         try {
             Class.forName(JDBC_DRIVER);
             io.print("Deleting Account..,");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            int accId = Integer.valueOf(io.ask("Id of Account to be Remove"));
+//            int accId = Integer.valueOf(io.ask("Id of Account to be Remove"));
             String accountUpdate = "DELETE FROM `tblaccounts` WHERE id = " + accId;
             stmt.executeUpdate(accountUpdate);
             stmt.close();

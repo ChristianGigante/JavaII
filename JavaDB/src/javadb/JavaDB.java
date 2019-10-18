@@ -19,6 +19,23 @@ public class JavaDB {
 
     public static int val;
 
+    public static int accID;
+    public static int temp;
+
+    public static int askId() {
+        String acc_id;
+        while (true) {
+            acc_id = io.ask("Account ID");
+            try {
+                isNumber(acc_id);
+                break;
+            } catch (ValidatorException e) {
+                System.err.println(e);
+            }
+        }
+        return Integer.valueOf(acc_id);
+    }
+
     //main
     public static void main(String[] args) throws Exception {
         //configureJDBC
@@ -30,6 +47,9 @@ public class JavaDB {
 
         //perInfo interface
         PerInfoInterface perInfo = new PerInfoInterface();
+
+        //schedule interface
+        CourseInterface course = new CourseInterface();
 
         int sel = Integer.valueOf(io.menuCrud());
 
@@ -46,7 +66,7 @@ public class JavaDB {
                                     perInfo.addPerInfo(id);
                                     break;
                                 case 2:
-                                    io.print("Leave the Personal info as BLANK");
+                                    io.print("Leave the Personal Information as BLANK");
                                     break;
                                 default:
                                     io.print("INVALID INPUT!");
@@ -56,6 +76,7 @@ public class JavaDB {
                             switch (val) {
                                 case 1:
                                     //sched goes here
+                                    course.addCourse(id);
                                     break;
                                 case 2:
                                     io.print("Leave the Schedule as BLANK");
@@ -66,18 +87,9 @@ public class JavaDB {
                             }
                             break;
                         case 2: //addPerInfo
-                            String acc_id;
-                            while (true) {
-                                acc_id = io.ask("Account ID");
-                                try {
-                                    isNumber(acc_id);
-                                    break;
-                                } catch (ValidatorException e) {
-                                    System.err.println(e);
-                                }
-                            }
-                            int accID =Integer.valueOf(acc_id);
-                            int temp = acc.getLastId();
+                            //ask id
+                            accID = askId();
+                            temp = acc.getLastId();
                             if (accID > temp) {
                                 io.print("Account ID does not Exist!");
                             } else {
@@ -85,7 +97,14 @@ public class JavaDB {
                             }
                             break;
                         case 3: //addSched
-                            io.print("sched");
+                            //ask id
+                            accID = askId();
+                            temp = acc.getLastId();
+                            if (accID > temp) {
+                                io.print("Account ID does not Exist!");
+                            } else {
+                                course.addCourse(accID);
+                            }
                             break;
                         case 4: //Back
                             break;
@@ -105,7 +124,7 @@ public class JavaDB {
                             perInfo.retrievePerInfo();
                             break;
                         case 3: //RetrieveSched
-                            io.print("sched");
+                            course.retrieveCourse();
                             break;
                         case 4: //Back
                             break;
@@ -118,13 +137,36 @@ public class JavaDB {
                     val = io.menuOption("Update");
                     switch (val) {
                         case 1: //UpdateAccount
-                            acc.updateAccount();
+                            //ask id
+                            accID = askId();
+                            temp = acc.getLastId();
+                            if (accID > temp) {
+                                io.print("Account ID does not Exist!");
+                            } else {
+                                acc.updateAccount(accID);
+                            }
+//                            acc.updateAccount();
                             break;
                         case 2: //UpdatePerInfo
-                            perInfo.updatePerInfo();
+                            //ask id
+                            accID = askId();
+                            temp = acc.getLastId();
+                            if (accID > temp) {
+                                io.print("Account ID does not Exist!");
+                            } else {
+                                perInfo.updatePerInfo(accID);
+                            }
+//                            perInfo.updatePerInfo();
                             break;
                         case 3: //UpdateSched
-                            io.print("sched");
+                            accID = askId();
+                            temp = acc.getLastId();
+                            if (accID > temp) {
+                                io.print("Account ID does not Exist!");
+                            } else {
+                                course.updateCourse(accID);
+                            }
+//                            course.updateCourse();
                             break;
                         case 4: //Back
                             break;
@@ -138,13 +180,37 @@ public class JavaDB {
                     val = io.menuOption("Delete");
                     switch (val) {
                         case 1: //DeleteAccount
-                            acc.deleteAccount();
+                            //ask id
+                            accID = askId();
+                            temp = acc.getLastId();
+                            if (accID > temp) {
+                                io.print("Account ID does not Exist!");
+                            } else {
+                                acc.deleteAccount(accID);
+                            }
+//                            acc.deleteAccount();
                             break;
                         case 2: //DeletePerInfo
-                            perInfo.deletePerInfo();
+                            //ask id
+                            accID = askId();
+                            temp = acc.getLastId();
+                            if (accID > temp) {
+                                io.print("Account ID does not Exist!");
+                            } else {
+                                perInfo.deletePerInfo(accID);
+                            }
+//                            perInfo.deletePerInfo();
                             break;
                         case 3: //DeleteSched
-                            io.print("sched");
+                            //ask id
+                            accID = askId();
+                            temp = acc.getLastId();
+                            if (accID > temp) {
+                                io.print("Account ID does not Exist!");
+                            } else {
+                                course.deleteCourse(accID);
+                            }
+//                            course.deleteCourse();
                             break;
                         case 4: //Back
                             break;
