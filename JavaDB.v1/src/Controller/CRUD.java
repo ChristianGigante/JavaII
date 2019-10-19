@@ -5,10 +5,26 @@
  */
 package Controller;
 
+import Model.*;
+import java.sql.Statement;
+
 /**
  *
  * @author 2ndyrGroupC
  */
 public class CRUD {
-    
+
+    private static InputOutput io = new InputOutput();
+    private static ConfigDB conn = new ConfigDB();
+    private static Statement stmt;
+
+    public void insertData(String sql) throws Exception {
+        conn.getConnection(); //create Connection to DB
+        stmt = conn.getConnection().createStatement(); //create query statement to DB
+        stmt.executeUpdate(sql); //execute Query
+        stmt.close(); //close statement
+        conn.getConnection().close(); //close DB connection
+        io.print("Done!");
+    }
+
 }

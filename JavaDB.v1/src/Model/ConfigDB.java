@@ -7,6 +7,7 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 
 /**
  *
@@ -26,4 +27,6 @@ public class ConfigDB {
         Class.forName(JDBC_DRIVER);
         return DriverManager.getConnection(DB_URL, USER, PASS);
     }
+
+
 }

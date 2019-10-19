@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Main;
+package View;
+import Controller.CRUD;
 import Model.*;
 /**
  *
@@ -20,7 +21,8 @@ public class main {
         
         ConfigDB conn = new ConfigDB();
         conn.getConnection();
-        
+        CRUD crud = new CRUD();
+        crud.insertData("");
     }
     
 }
