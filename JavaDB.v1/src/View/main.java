@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package View;
+
 import Controller.CRUD;
 import Model.*;
+
 /**
  *
  * @author 2ndyrGroupC
@@ -18,11 +20,11 @@ public class main {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-        
+
         ConfigDB conn = new ConfigDB();
         conn.getConnection();
         CRUD crud = new CRUD();
         crud.insertData("");
     }
-    
+
 }

@@ -28,5 +28,4 @@ public class ConfigDB {
         return DriverManager.getConnection(DB_URL, USER, PASS);
     }
 
-
 }

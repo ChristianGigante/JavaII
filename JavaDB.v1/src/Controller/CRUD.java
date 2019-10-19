@@ -14,8 +14,8 @@ import java.sql.Statement;
  */
 public class CRUD {
 
-    private static InputOutput io = new InputOutput();
-    private static ConfigDB conn = new ConfigDB();
+    private final InputOutput io = new InputOutput();
+    private final ConfigDB conn = new ConfigDB();
     private static Statement stmt;
 
     public void insertData(String sql) throws Exception {
